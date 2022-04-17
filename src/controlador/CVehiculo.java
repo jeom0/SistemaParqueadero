@@ -1,6 +1,5 @@
 package controlador;
 
-import java.sql.Statement;
 import modelo.Vehiculo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,6 +20,7 @@ public class CVehiculo {
     public CVehiculo(){
         conectar = new Conectar();
         modelo = new Vehiculo();
+        
     }
      
     public void insertar(String placa, String tipovehiculo,String fechaingreso, String horaentrada){
@@ -65,62 +65,63 @@ public class CVehiculo {
         }
     }
     
-    public void buscar(String placa, String horasalida) {
-        PreparedStatement ps;
-        ResultSet rs;
-        String sql;
-        modelo.setPlaca(placa);
-        modelo.setHorasalida(horasalida);
+    public void buscar(String placa, String horasalida, JTable jTable) {
+        DefaultTableModel ModeloTabla;
         
-        /*
-        model.addColumn("id");
-        model.addColumn("placa");
-        model.addColumn("tipovehiculo");
-        model.addColumn("fechaingreso");
-        model.addColumn("horaentrada");
-        model.addColumn("horasalida");
+        String [] columnas={"ID","Placa","Tipo Vehiculo","Fecha Ingreso","Hora Entrada","Hora Salida"};
+        String [] registro=new String[6];
+        ModeloTabla=new DefaultTableModel(null,columnas);      
+        String SQL;
         
-        Object [] fila = new Object[2];
-        fila[0] = "id";
-        fila[1] = "placa";
-        fila[2] = "tipovehiculo";
-        fila[3] = "fechaingreso";
-        fila[4] = "horaentrada";
-        fila[5] = "horasalida";
         
-        model.addRow ( fila );
-        model.setValueAt("nuevo valor", 0, 1);
-        model.removeRow (0); */
         
-        try{
-            con = conectar.getConexion();
-            sql = "SELECT * FROM vehiculo";
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery(sql);
-            DefaultTableModel model = new DefaultTableModel();
-            JTable jTable = new JTable(model);
-            
-            while(rs.next()){
-               
-               
-                String id = String.valueOf(rs.getInt("id"));
-                placa = rs.getString("placa");
-                String tipovehiculo = rs.getString("tipovehiculo");
-                String fechaingreso = rs.getString("fechaingreso");
-                String horaentrada = rs.getString("horaentrada");
-                horasalida = rs.getString("horasalida");
-                
-                
-                
-                String tbData[] = {id, placa, tipovehiculo, fechaingreso, horaentrada, horasalida};
-                model.addRow(tbData);
-                
-            }
-            jTable.setModel(model);
-            
-            
-        }catch(SQLException e){
-            JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getMessage());
+         
+    try {
+
+        con = conectar.getConexion();
+        SQL= "SELECT * FROM vehiculo";
+        PreparedStatement st = con.prepareStatement(SQL);
+        ResultSet rs = st.executeQuery();
+
+        while (rs.next()){
+          
+            registro[0]=rs.getString("id");
+            registro[1]=rs.getString("placa");
+            registro[2]=rs.getString("tipovehiculo");
+            registro[3]=rs.getString("fechaingreso");
+            registro[4]=rs.getString("horaentrada");
+            registro[5]=rs.getString("horasalida");
+           
+          
+            ModeloTabla.addRow(registro);
+           
         }
+        
+        jTable.setModel(ModeloTabla);
+
+    } catch (SQLException e) {
+
+
+        JOptionPane.showMessageDialog(null, e, "Error durante el procedimiento", JOptionPane.ERROR_MESSAGE);
+    
+    
+    }finally{
+
+        if(con!=null){
+        
+            try {
+
+                con.close();
+
+            } catch (SQLException ex) {
+
+                JOptionPane.showMessageDialog(null, ex, "Error de desconexión", JOptionPane.ERROR_MESSAGE);
+
+            }
+        
+        }
+        
     }
+
+}
 }

@@ -6,6 +6,8 @@ package view;
 
 import controlador.CVehiculo;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+
 
 
 /**
@@ -14,9 +16,8 @@ import javax.swing.JOptionPane;
  */
 public class PanelListarVehiculos extends javax.swing.JPanel {
     
-    /**
-     * Creates new form PanelListarVehiculos
-     */
+    
+    
     public PanelListarVehiculos() {
         initComponents();
     }
@@ -158,6 +159,8 @@ public class PanelListarVehiculos extends javax.swing.JPanel {
         String mensaje = "";
         String placa = txtPlaca.getText();
         String fechaingreso = txtFecha.getText();
+        JTable jTable = new JTable();
+        
  
     if(placa.length()==0){
         guardar = false;
@@ -170,7 +173,7 @@ public class PanelListarVehiculos extends javax.swing.JPanel {
     }
     if(guardar){
         CVehiculo control = new CVehiculo();
-        control.buscar(placa, fechaingreso);
+        control.buscar(placa, fechaingreso, jTable);
         txtPlaca.setText("");
         txtFecha.setText("");
         
