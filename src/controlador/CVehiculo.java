@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import javaMYSQL.Conectar;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 
  
@@ -65,26 +65,22 @@ public class CVehiculo {
         }
     }
     
-    public void buscar(String placa, String horasalida, JTable jTable) {
-        DefaultTableModel ModeloTabla;
+    public DefaultTableModel buscar(String placa, String fechaingreso) {
         
-        String [] columnas={"ID","Placa","Tipo Vehiculo","Fecha Ingreso","Hora Entrada","Hora Salida"};
+        String [] columnas={"id","placa","tipovehiculo","fechaingreso","horaentrada","horasalida"};
         String [] registro=new String[6];
-        ModeloTabla=new DefaultTableModel(null,columnas);      
+        DefaultTableModel ModeloTabla =new DefaultTableModel(null,columnas);
+        JTable table = new JTable(ModeloTabla);
         String SQL;
         
-        
-        
-         
     try {
 
         con = conectar.getConexion();
         SQL= "SELECT * FROM vehiculo";
         PreparedStatement st = con.prepareStatement(SQL);
-        ResultSet rs = st.executeQuery();
-
+        ResultSet rs = st.executeQuery(SQL);
         while (rs.next()){
-          
+            
             registro[0]=rs.getString("id");
             registro[1]=rs.getString("placa");
             registro[2]=rs.getString("tipovehiculo");
@@ -92,12 +88,10 @@ public class CVehiculo {
             registro[4]=rs.getString("horaentrada");
             registro[5]=rs.getString("horasalida");
            
-          
+            
             ModeloTabla.addRow(registro);
-           
         }
-        
-        jTable.setModel(ModeloTabla);
+       table.setModel(ModeloTabla);
 
     } catch (SQLException e) {
 
@@ -115,13 +109,15 @@ public class CVehiculo {
 
             } catch (SQLException ex) {
 
-                JOptionPane.showMessageDialog(null, ex, "Error de desconexión", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, ex, "Error de de conexión", JOptionPane.ERROR_MESSAGE);
 
             }
         
         }
         
     }
+        
+        return ModeloTabla;
 
-}
+    }
 }
