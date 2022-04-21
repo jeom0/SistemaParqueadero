@@ -75,7 +75,7 @@ public class CVehiculo {
     try {
 
         con = conectar.getConexion();
-        SQL= "SELECT * FROM vehiculo";
+        SQL= "SELECT * FROM vehiculo WHERE placa= '"+placa+"' AND fechaingreso = '"+fechaingreso+"'";
         PreparedStatement st = con.prepareStatement(SQL);
         ResultSet rs = st.executeQuery(SQL);
         while (rs.next()){
