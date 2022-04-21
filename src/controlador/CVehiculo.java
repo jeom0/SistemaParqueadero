@@ -70,7 +70,6 @@ public class CVehiculo {
         String [] columnas={"id","placa","tipovehiculo","fechaingreso","horaentrada","horasalida"};
         String [] registro=new String[6];
         DefaultTableModel ModeloTabla =new DefaultTableModel(null,columnas);
-        JTable table = new JTable(ModeloTabla);
         String SQL;
         
     try {
@@ -91,7 +90,7 @@ public class CVehiculo {
             
             ModeloTabla.addRow(registro);
         }
-       table.setModel(ModeloTabla);
+       
 
     } catch (SQLException e) {
 
