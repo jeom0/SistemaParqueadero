@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import javaMYSQL.Conectar;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -59,7 +58,7 @@ public class CVehiculo {
             sql = "UPDATE vehiculo SET horasalida ='"+horasalida+"' WHERE placa= '"+placa+"'";
             ps = con.prepareStatement(sql);
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Se ha retirado el vehiculo");
+            JOptionPane.showMessageDialog(null, "Se ha retirado el vehiculo ");
         }catch(SQLException e){
             JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getMessage());
         }

@@ -1,9 +1,11 @@
 
 package view;
 
+import controlador.CTarifas;
 import controlador.CVehiculo;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+
+
 
 public class PanelRetirarVehiculo extends javax.swing.JPanel {
 
@@ -57,16 +59,16 @@ public class PanelRetirarVehiculo extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txHorasalida, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(138, 138, 138)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(174, 174, 174)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txHorasalida, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 80, Short.MAX_VALUE)
@@ -95,6 +97,11 @@ public class PanelRetirarVehiculo extends javax.swing.JPanel {
         String mensaje = "";
         String placa = txPlaca.getText();
         String horasalida = txHorasalida.getText();
+        CTarifas controlador = new CTarifas();
+        String tipotarifa = null;
+       
+        
+        
         
         if(placa.length()==0){
         retirar = false;
@@ -108,7 +115,9 @@ public class PanelRetirarVehiculo extends javax.swing.JPanel {
         
         if(retirar){
         CVehiculo control = new CVehiculo();
+        
         control.retirar(placa, horasalida);
+        controlador.retirar(tipotarifa);
         txPlaca.setText("");
         txHorasalida.setText("");
         
