@@ -1,17 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
-/**
- *
- * @author jeom
- */
 public class Tarifas {
     private int idtarifas;
     private String tipotarifa;
     private String tipovehiculo;
+    
+    public Tarifas() {
+        
+    }
+
+    public Tarifas(int idtarifas, String tipotarifa, String tipovehiculo) {
+        this.idtarifas = idtarifas;
+        this.tipotarifa = tipotarifa;
+        this.tipovehiculo = tipovehiculo;
+    }
 
     public int getIdtarifas() {
         return idtarifas;

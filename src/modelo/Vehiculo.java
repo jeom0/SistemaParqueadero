@@ -1,7 +1,5 @@
 package modelo;
 
-
-
 public class Vehiculo {
     
     private String id;
@@ -11,6 +9,18 @@ public class Vehiculo {
     private String horaentrada;
     private String horasalida;
     
+    public Vehiculo() {
+        
+    }
+    
+    public Vehiculo(String id, String placa, String tipovehiculo, String fechaingreso, String horaentrada, String horasalida) {
+        this.id = id;
+        this.placa = placa;
+        this.tipovehiculo = tipovehiculo;
+        this.fechaingreso = fechaingreso;
+        this.horaentrada = horaentrada;
+        this.horasalida = horasalida;
+    }
 
     public String getId() {
         return id;

@@ -146,16 +146,6 @@ public class PanelListarVehiculos extends javax.swing.JPanel {
         String placa = txtPlaca.getText();
         String fechaingreso = txtFecha.getText();
         
-       
-    if(placa.length()==0){
-        guardar = false;
-        mensaje+="Escriba la placa, por favor\n";
-    }  
-    
-    if(fechaingreso.length()==0){
-        guardar = false;
-        mensaje+="Escriba la fecha, por favor\n";
-    }
     if(guardar){
         CVehiculo control = new CVehiculo();
         DefaultTableModel ModelTabla = control.buscar(placa, fechaingreso); 

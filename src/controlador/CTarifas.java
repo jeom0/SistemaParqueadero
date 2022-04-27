@@ -1,4 +1,3 @@
-
 package controlador;
 
 import java.sql.PreparedStatement;
@@ -9,8 +8,8 @@ import java.sql.SQLException;
 import modelo.Tarifas;
 
 public class CTarifas {
-    private Conectar conectar;
-    private Tarifas modelo;
+    private final Conectar conectar;
+    private final Tarifas modelo;
     private Connection con;
     
     public CTarifas(){
@@ -32,7 +31,7 @@ public class CTarifas {
             ps.setString(1, modelo.getTipovehiculo());
             ps.setString(2, modelo.getTipotarifa());
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "La tarifa a pagar es: "+ tipotarifa );
+            JOptionPane.showMessageDialog(null, "La tarifa a pagar es: " + tipotarifa );
         }catch(SQLException e){
             JOptionPane.showMessageDialog(null, "Error de conexión:" + e.getMessage());
         }    
@@ -41,8 +40,7 @@ public class CTarifas {
     public void retirar(String tipotarifa){
         PreparedStatement ps;
         String sql;
-       
-
+ 
         try{
             con = conectar.getConexion();
             sql = "SELECT tipotarifa FROM tarifas";

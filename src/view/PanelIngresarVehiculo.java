@@ -6,9 +6,6 @@ import javax.swing.JOptionPane;
 
 public class PanelIngresarVehiculo extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Vehiculo
-     */
     public PanelIngresarVehiculo() {
         initComponents();
     }

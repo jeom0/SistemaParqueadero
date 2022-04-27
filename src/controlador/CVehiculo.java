@@ -12,8 +12,8 @@ import javax.swing.table.DefaultTableModel;
 
  
 public class CVehiculo {
-    private Conectar conectar;
-    private Vehiculo modelo;
+    private final Conectar conectar;
+    private final Vehiculo modelo;
     private Connection con;
      
     public CVehiculo(){
@@ -74,12 +74,12 @@ public class CVehiculo {
     try {
 
         con = conectar.getConexion();
-        SQL= "SELECT * FROM vehiculo WHERE placa= '"+placa+"' AND fechaingreso = '"+fechaingreso+"'";
+        SQL= "SELECT * FROM vehiculo WHERE placa = '"+placa+"' OR fechaingreso = '"+fechaingreso+"'";
         PreparedStatement st = con.prepareStatement(SQL);
         ResultSet rs = st.executeQuery(SQL);
         while (rs.next()){
             
-            registro[0]=rs.getString("id");
+            registro[0]=rs.getString("idvehiculo");
             registro[1]=rs.getString("placa");
             registro[2]=rs.getString("tipovehiculo");
             registro[3]=rs.getString("fechaingreso");
